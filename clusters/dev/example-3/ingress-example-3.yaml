@@ -8,10 +8,10 @@ spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
     - hosts:
-        - example-3.aks.rk3.dev
+        - custom.aks.rk3.dev
       secretName: tls-secret
   rules:
-    - host: "example-3.aks.rk3.dev"
+    - host: "custom.aks.rk3.dev"
       http:
         paths:
           - backend:
