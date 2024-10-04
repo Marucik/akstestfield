@@ -11,7 +11,7 @@ spec:
         - example-2.aks.rk3.dev
       secretName: tls-secret
   rules:
-    - host: "aexample-2.aks.rk3.dev"
+    - host: "example-2.aks.rk3.dev"
       http:
         paths:
           - backend:
