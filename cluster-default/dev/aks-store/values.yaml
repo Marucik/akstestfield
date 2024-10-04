@@ -1,9 +1,0 @@
-config:
-  namespace: aks-store-backend
-
-microservice:
-  image:
-    repository: "argouniverse/backend-app"
-    imageTag: dev-15
-  ingress:
-    enabled: false
