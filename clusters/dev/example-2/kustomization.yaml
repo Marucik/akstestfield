@@ -8,4 +8,4 @@ resources:
   - ./namespace.yaml
 
 patches:
-  - path: ingress-example-1.yaml
+  - path: ingress-example-2.yaml
