@@ -7,5 +7,4 @@ resources:
   - ../../../shared/store-app
 
 patches:
-  - path: deployment-example-1.yaml
   - path: ingress-example-1.yaml
