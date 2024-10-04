@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: store-front
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  tls:
+    - hosts:
+        - example-2.aks.rk3.dev
+      secretName: tls-secret
+  rules:
+    - host: "aexample-2.aks.rk3.dev"
+      http:
+        paths:
+          - backend:
+              service:
+                name: store-front
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
