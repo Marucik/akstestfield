@@ -5,6 +5,7 @@ namespace: example-1
 
 resources:
   - ../../../shared/store-app
+  - ./namespace.yaml
 
 patches:
   - path: ingress-example-1.yaml
