@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: db-test
-          image: akstestfield.azurecr.io/db-test:0.0.1
+          image: akstestfield.azurecr.io/db-test:0.0.2
           ports:
             - containerPort: 8080
               name: db-test
