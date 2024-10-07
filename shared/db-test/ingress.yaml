@@ -1,17 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: store-front
+  name: db-test
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
     - hosts:
-        - db-test.aks.rk3.dev
       secretName: tls-secret
   rules:
-    - host: "db-test.aks.rk3.dev"
+    - host: "example.com"
       http:
         paths:
           - backend:

@@ -1,11 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: example-1
+namespace: db-test-1
 
 resources:
   - ../../../shared/db-test
-  - ./namespace.yaml
+  - ./namespace.yaml\
 
 patches:
-  - path: ingress.yaml
+  - path: ingress-patch.json
+    target:
+      name: db-test
+      kind: Ingress

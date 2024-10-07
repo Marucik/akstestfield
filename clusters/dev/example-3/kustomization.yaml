@@ -8,4 +8,7 @@ resources:
   - ./namespace.yaml
 
 patches:
-  - path: ingress-example-3.yaml
+  - path: ingress-patch.json
+    target:
+      name: store-front
+      kind: Ingress

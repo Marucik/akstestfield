@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/spec/tls/0/hosts",
+    "value": "example-2.aks.rk3.dev"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/rules/0/host",
+    "value": "example-2.aks.rk3.dev"
+  }
+]
