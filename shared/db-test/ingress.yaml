@@ -8,6 +8,7 @@ spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
     - hosts:
+        - "example.com"
       secretName: tls-secret
   rules:
     - host: "example.com"
