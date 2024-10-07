@@ -5,7 +5,7 @@ namespace: db-test-1
 
 resources:
   - ../../../shared/db-test
-  - ./namespace.yaml\
+  - ./namespace.yaml
 
 patches:
   - path: ingress-patch.json
