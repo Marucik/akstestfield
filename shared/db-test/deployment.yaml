@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-test
+  template:
+    metadata:
+      labels:
+        app: db-test
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: db-test
+          image: akstestfield.azurecr.io/db-test:latest
+          ports:
+            - containerPort: 8080
+              name: db-test
+          resources:
+            requests:
+              cpu: 1m
+              memory: 200Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-test
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: db-test
