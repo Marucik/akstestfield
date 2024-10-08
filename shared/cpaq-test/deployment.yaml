@@ -70,21 +70,25 @@ spec:
             - name: CORDIC_SITE
               value: "9999900007"
             - name: CORDIC_SQL_SERVER
-              secretKeyRef:
-                name: dbsecrets
-                key: sqlServer
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecrets
+                  key: sqlServer
             - name: CORDIC_SQL_DATABASE
-              secretKeyRef:
-                name: dbsecrets
-                key: sqlDatabase
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecrets
+                  key: sqlDatabase
             - name: CORDIC_SQL_USER
-              secretKeyRef:
-                name: dbsecrets
-                key: sqlUser
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecrets
+                  key: sqlUser
             - name: CORDIC_SQL_PASSWORD
-              secretKeyRef:
-                name: dbsecrets
-                key: sqlPassword
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecrets
+                  key: sqlPassword
 ---
 apiVersion: v1
 kind: Service
