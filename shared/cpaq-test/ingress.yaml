@@ -17,6 +17,6 @@ spec:
           - backend:
               service:
                 name: cpaq-fleet-svc-iis
-                port: http
+                port: 80
             path: /
             pathType: Prefix
