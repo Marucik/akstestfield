@@ -15,7 +15,7 @@ spec:
       labels:
         cordic.system: fleet
         cordic.fleet: markcars2
-        cordic.messagegw: true
+        cordic.messagegw: "true"
         cordic.iis: iis
     spec:
       os:
@@ -39,7 +39,7 @@ spec:
       # ":latest" can be replaced with a specific production version
       containers:
         - name: cpaq-fleet
-          image: akstestfield.azurecr.io/cpaq-container:latest
+          image: cordicdev.azurecr.io/cpaq-container:0.0.1
           # set CPU & memory requirements & limits            *** TBD after load testing
           #        resources:
           #          requests:
@@ -98,7 +98,7 @@ spec:
       name: mgwy
       targetPort: cpaq-mgw
   selector:
-    cordic.messagegw: true
+    cordic.messagegw: "true"
 ---
 apiVersion: v1
 kind: Service
@@ -110,9 +110,7 @@ spec:
   ports:
     - port: 80
       name: http
-      targetPort: cpaq-http
     - port: 443
       name: https
-      targetPort: cpaq-https
   selector:
     app: cpaq-fleet-dep
