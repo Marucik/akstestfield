@@ -16,10 +16,16 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: db-test
-          image: akstestfield.azurecr.io/db-test:0.0.3
+          image: cordicdev.azurecr.io/db-test:0.0.1
           ports:
             - containerPort: 8080
               name: db-test
+          env:
+            - name: ConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecrets
+                  key: connectionString
           resources:
             requests:
               cpu: 1m
