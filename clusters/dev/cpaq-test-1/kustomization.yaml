@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cpaq-test-1
+
+resources:
+  - ../../../shared/cpaq-test
+  - ./namespace.yaml
+  - ./secrets.yaml
+
+patches:
+  - path: ingress-patch.json
+    target:
+      name: cpaq-fleet-ing
+      kind: Ingress

@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cpaq-fleet-ing
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  tls:
+    - hosts:
+        - "example.com"
+      secretName: tls-secret
+  rules:
+    - host: "example.com"
+      http:
+        paths:
+          - backend:
+              service:
+                name: cpaq-fleet-svc-iis
+                port: http
+            path: /
+            pathType: Prefix

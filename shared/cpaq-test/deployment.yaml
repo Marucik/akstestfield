@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpaq-fleet-dep
+  labels:
+    cordic.system: fleet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      cordic.system: fleet
+      cordic.fleet: markcars2
+  template:
+    metadata:
+      labels:
+        cordic.system: fleet
+        cordic.fleet: markcars2
+        cordic.messagegw: true
+        cordic.iis: iis
+    spec:
+      os:
+        name: windows
+      nodeSelector:
+        kubernetes.io/os: windows
+        kubernetes.azure.com/os-sku: Windows2019
+      # External volumes for Log files & secrets
+      # TODO: Add address database
+      # volumes:
+      # - name: cpaq-fleet-vol-logs # File storage for log files
+      #   persistentVolumeClaim:
+      #     claimName: cpaq-fleet-pvc-log # Defined in "cpaq-vol-logs.yml"
+      # - name: cpaq-fleet-vol-secrets # Key vault for certificates & passwords
+      #   csi:
+      #     driver: secrets-store.csi.k8s.io
+      #     readOnly: true
+      #     volumeAttributes:
+      #       secretProviderClass: cpaq-fleet-spc # Defined by SecretProviderClass below
+      # specify the container image(s) to run.  markcars2acr.azurecr.io is azure container repository
+      # ":latest" can be replaced with a specific production version
+      containers:
+        - name: cpaq-fleet
+          image: akstestfield.azurecr.io/cpaq-container:latest
+          # set CPU & memory requirements & limits            *** TBD after load testing
+          #        resources:
+          #          requests:
+          #            cpu: 100m
+          #            memory: 256Mi
+          #          limits:
+          #            cpu: 100m
+          #            memory: 256Mi
+          # link to the container MessageGW & IIS ports to relevant services & external names
+          ports:
+            - { name: cpaq-mgw, containerPort: 41152 }
+            - { name: cpaq-https, containerPort: 443 }
+            - { name: cpaq-http, containerPort: 80 }
+          # mount the various volumes for logs & secrets
+          volumeMounts:
+            # - { name: cpaq-fleet-vol-logs, mountPath: "C:\\Log" }
+            # - { name: cpaq-fleet-vol-secrets, mountPath: "K:", readOnly: true }
+          # set the container environment variables
+          env:
+            - name: CORDIC_PATH
+              value: "C:\\Cordic"
+            - name: CORDIC_LOCALE
+              value: "en-GB"
+            - name: CORDIC_FLEET_DISPLAY
+              value: "Cabbage Ltd"
+            - name: CORDIC_FLEET_NAME
+              value: "Cabbage"
+            - name: CORDIC_SITE
+              value: "9999900007"
+            - name: CORDIC_SQL_SERVER
+              secretKeyRef:
+                name: dbsecrets
+                key: sqlServer
+            - name: CORDIC_SQL_DATABASE
+              secretKeyRef:
+                name: dbsecrets
+                key: sqlDatabase
+            - name: CORDIC_SQL_USER
+              secretKeyRef:
+                name: dbsecrets
+                key: sqlUser
+            - name: CORDIC_SQL_PASSWORD
+              secretKeyRef:
+                name: dbsecrets
+                key: sqlPassword
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpaq-fleet-svc-mgw
+  labels:
+    cordic.system: fleet
+spec:
+  ports:
+    - port: 41152
+      name: mgwy
+      targetPort: cpaq-mgw
+  selector:
+    cordic.messagegw: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpaq-fleet-svc-iis
+  labels:
+    cordic.system: fleet
+spec:
+  ports:
+    - port: 80
+      name: http
+      targetPort: cpaq-http
+    - port: 443
+      name: https
+      targetPort: cpaq-https
+  selector:
+    app: cpaq-fleet-dep
