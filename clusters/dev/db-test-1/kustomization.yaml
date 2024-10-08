@@ -11,5 +11,5 @@ resources:
 patches:
   - path: ingress-patch.json
     target:
-      name: store-front
+      name: db-test
       kind: Ingress
