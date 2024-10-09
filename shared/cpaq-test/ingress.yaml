@@ -4,7 +4,6 @@ metadata:
   name: cpaq-fleet-ing
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
@@ -19,6 +18,6 @@ spec:
               service:
                 name: cpaq-fleet-svc-iis
                 port:
-                  name: http
+                  number: 80
             path: /
             pathType: Prefix
