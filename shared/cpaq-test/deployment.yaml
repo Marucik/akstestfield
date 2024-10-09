@@ -2,22 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cpaq-fleet-dep
-  labels:
-    cordic.system: fleet
 spec:
   replicas: 1
   selector:
     matchLabels:
-      cordic.system: fleet
-      cordic.fleet: markcars2
       app: cpaq-fleet-dep
   template:
     metadata:
       labels:
-        cordic.system: fleet
-        cordic.fleet: markcars2
-        cordic.messagegw: "true"
-        cordic.iis: iis
+        app: cpaq-fleet-dep
     spec:
       os:
         name: windows
