@@ -22,7 +22,7 @@ spec:
         name: windows
       nodeSelector:
         kubernetes.io/os: windows
-        kubernetes.azure.com/os-sku: Windows2019
+        kubernetes.azure.com/os-sku: Windows2022
       # External volumes for Log files & secrets
       # TODO: Add address database
       # volumes:
