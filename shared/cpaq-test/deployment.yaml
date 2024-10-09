@@ -39,7 +39,7 @@ spec:
       # ":latest" can be replaced with a specific production version
       containers:
         - name: cpaq-fleet
-          image: cordicdev.azurecr.io/cpaq-container:0.1.1
+          image: cordicdev.azurecr.io/cpaq-container:0.1.0
           # set CPU & memory requirements & limits            *** TBD after load testing
           #        resources:
           #          requests:
