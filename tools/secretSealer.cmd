@@ -1,1 +1,1 @@
-echo|set /p=%1 | kubeseal --raw --namespace cpaq-test-1 --name dbsecrets
+echo|set /p="%1"| kubeseal --raw --namespace cpaq-test-1 --name dbsecrets
