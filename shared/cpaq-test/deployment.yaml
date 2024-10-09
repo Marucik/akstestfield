@@ -10,6 +10,7 @@ spec:
     matchLabels:
       cordic.system: fleet
       cordic.fleet: markcars2
+      app: cpaq-fleet-dep
   template:
     metadata:
       labels:
@@ -50,7 +51,7 @@ spec:
           #            memory: 256Mi
           # link to the container MessageGW & IIS ports to relevant services & external names
           ports:
-            - { name: cpaq-mgw, containerPort: 41152 }
+            # - { name: cpaq-mgw, containerPort: 41152 }
             - { name: cpaq-https, containerPort: 443 }
             - { name: cpaq-http, containerPort: 80 }
           # mount the various volumes for logs & secrets
@@ -101,15 +102,11 @@ spec:
     - port: 41152
       name: mgwy
       targetPort: cpaq-mgw
-  selector:
-    cordic.messagegw: "true"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: cpaq-fleet-svc-iis
-  labels:
-    cordic.system: fleet
 spec:
   ports:
     - port: 80
