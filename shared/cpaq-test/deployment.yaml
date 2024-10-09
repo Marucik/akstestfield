@@ -90,18 +90,18 @@ spec:
                 secretKeyRef:
                   name: dbsecrets
                   key: sqlPassword
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: cpaq-fleet-svc-mgw
-  labels:
-    cordic.system: fleet
-spec:
-  ports:
-    - port: 41152
-      name: mgwy
-      targetPort: cpaq-mgw
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: cpaq-fleet-svc-mgw
+#   labels:
+#     cordic.system: fleet
+# spec:
+#   ports:
+#     - port: 41152
+#       name: mgwy
+#       targetPort: cpaq-mgw
 ---
 apiVersion: v1
 kind: Service
