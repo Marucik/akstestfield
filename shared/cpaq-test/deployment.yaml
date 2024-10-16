@@ -37,11 +37,11 @@ spec:
           # set CPU & memory requirements & limits            *** TBD after load testing
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
               cpu: 200m
               memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           # link to the container MessageGW & IIS ports to relevant services & external names
           ports:
             # - { name: cpaq-mgw, containerPort: 41152 }
