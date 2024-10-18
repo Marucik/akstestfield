@@ -4,6 +4,7 @@ metadata:
   name: cpaq-portal-ing
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/app-root: /
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
