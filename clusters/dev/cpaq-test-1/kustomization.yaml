@@ -5,6 +5,7 @@ namespace: cpaq-test-1
 
 resources:
   - ../../../shared/cpaq-test
+  - ../../../shared/portal
   - ./namespace.yaml
   - ./secrets.yaml
 
@@ -13,7 +14,13 @@ patches:
     target:
       name: cpaq-ing
       kind: Ingress
+  - path: ingress-patch.json
+    target:
+      name: cpaq-portal-ing
+      kind: Ingress
 
 images:
   - name: cordicdev.azurecr.io/cpaq
+    newTag: 0.0.1
+  - name: cordicdev.azurecr.io/cpaq-portal
     newTag: 0.0.1

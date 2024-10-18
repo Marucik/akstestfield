@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cpaq-dep
+  name: cpaq-portal-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cpaq-dep
+      app: cpaq-portal-dep
   template:
     metadata:
       labels:
-        app: cpaq-dep
+        app: cpaq-portal-dep
     spec:
       os:
         name: windows
@@ -18,10 +18,9 @@ spec:
         kubernetes.io/os: windows
         kubernetes.azure.com/os-sku: Windows2022
       containers:
-        - name: cpaq
-          image: cordicdev.azurecr.io/cpaq
+        - name: portal
+          image: cordicdev.azurecr.io/cpaq-portal
           ports:
-            - { name: mgw, containerPort: 41152 }
             - { name: https, containerPort: 443 }
             - { name: http, containerPort: 80 }
           volumeMounts:
@@ -60,19 +59,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cpaq-svc-mgw
-spec:
-  ports:
-    - port: 41152
-      name: mgw
-      targetPort: 41152
-  selector:
-    app: cpaq-dep
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: cpaq-svc-iis
+  name: cpaq-portal-svc-iis
 spec:
   ports:
     - port: 80
@@ -82,4 +69,4 @@ spec:
       targetPort: 443
       name: https
   selector:
-    app: cpaq-dep
+    app: cpaq-portal-dep
