@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cpaq-fleet-ing
+  name: cpaq-ing
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
@@ -16,7 +16,7 @@ spec:
         paths:
           - backend:
               service:
-                name: cpaq-fleet-svc-iis
+                name: cpaq-svc-iis
                 port:
                   number: 80
             path: /

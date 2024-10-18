@@ -13,3 +13,7 @@ patches:
     target:
       name: cpaq-fleet-ing
       kind: Ingress
+
+images:
+  - name: cordicdev.azurecr.io/cpaq
+    newTag: 0.0.1
