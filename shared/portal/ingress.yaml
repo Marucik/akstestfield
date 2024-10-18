@@ -4,6 +4,7 @@ metadata:
   name: cpaq-portal-ing
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:
@@ -14,14 +15,7 @@ spec:
     - host: "example.com"
       http:
         paths:
-          - path: /jobbookws
-            pathType: Prefix
-            backend:
-              service:
-                name: cpaq-portal-svc-iis
-                port:
-                  number: 80
-          - path: /joblistws
+          - path: /portal(/|$)(.*)
             pathType: Prefix
             backend:
               service:

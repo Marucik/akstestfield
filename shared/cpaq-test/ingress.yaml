@@ -15,7 +15,7 @@ spec:
     - host: "example.com"
       http:
         paths:
-          - path: /
+          - path: /base(/|$)(.*)
             pathType: Prefix
             backend:
               service:
