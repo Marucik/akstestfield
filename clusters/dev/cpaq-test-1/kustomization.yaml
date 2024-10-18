@@ -11,7 +11,7 @@ resources:
 patches:
   - path: ingress-patch.json
     target:
-      name: cpaq-fleet-ing
+      name: cpaq-ing
       kind: Ingress
 
 images:
