@@ -17,6 +17,8 @@ spec:
       nodeSelector:
         kubernetes.io/os: windows
         kubernetes.azure.com/os-sku: Windows2022
+      strategy:
+        type: Recreate
       containers:
         - name: cpaq
           image: cordicdev.azurecr.io/cpaq
