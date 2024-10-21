@@ -2,11 +2,11 @@
   {
     "op": "replace",
     "path": "/spec/tls/0/hosts/0",
-    "value": "cpaq-test-1.aks.rk3.dev"
+    "value": "cpaq-test-1.int-dev-aks.cordiccloud.com"
   },
   {
     "op": "replace",
     "path": "/spec/rules/0/host",
-    "value": "cpaq-test-1.aks.rk3.dev"
+    "value": "cpaq-test-1.int-dev-aks.cordiccloud.com"
   }
 ]
