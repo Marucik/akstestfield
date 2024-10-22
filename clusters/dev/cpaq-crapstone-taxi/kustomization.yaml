@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cpaq-crapstone-taxi
+
+resources:
+  - ../../../shared/cpaq-test
+  - ../../../shared/portal
+  - ./namespace.yaml
+  - ./secrets.yaml
+
+patches:
+  - path: ingress-patch.json
+    target:
+      name: cpaq-ing
+      kind: Ingress
+  - path: ingress-patch.json
+    target:
+      name: cpaq-portal-ing
+      kind: Ingress
+
+images:
+  - name: cordicdev.azurecr.io/cpaq
+    newTag: 1.0.0
+  - name: cordicdev.azurecr.io/cpaq-portal
+    newTag: 1.0.0

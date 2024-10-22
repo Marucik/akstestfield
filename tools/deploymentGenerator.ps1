@@ -2,9 +2,11 @@ param (
   [Parameter(Mandatory = $true)]
   [string]$ClientName,
 
-  [string]$CpaqVersion = "latest",
+  [Parameter(Mandatory = $true)]
+  [string]$CpaqVersion,
 
-  [string]$PortalVersion = "latest",
+  [Parameter(Mandatory = $true)]
+  [string]$PortalVersion,
 
   [Parameter(Mandatory = $true)]
   [securestring]$SqlPassword,
@@ -34,7 +36,7 @@ function Protect-Secret {
   return Set-Variable /p="$SecretValue" | kubeseal --raw --namespace $Namespace --name $SecretName
 }
 
-$Namespace = "cpaq-$ClientName"
+$Namespace = "cpaq-$($ClientName.ToLower())"
 $RelativePath = "..\clusters\dev\$Namespace"
 
 # Ensure the directory exists
@@ -49,7 +51,7 @@ if (Test-Path $IngressTemplatePath) {
   $JsonTemplate = Get-Content -Path $IngressTemplatePath -Raw
 
   
-  $Domain = "$ClientName.int-dev-aks.cordiccloud.com"
+  $Domain = "$($ClientName.ToLower()).int-dev-aks.cordiccloud.com"
   
   $JsonTemplate = $JsonTemplate -replace "{{Domain}}", $Domain
 
