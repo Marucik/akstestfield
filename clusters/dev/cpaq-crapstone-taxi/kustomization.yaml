@@ -24,3 +24,4 @@ images:
     newTag: 1.0.0
   - name: cordicdev.azurecr.io/cpaq-portal
     newTag: 1.0.0
+
