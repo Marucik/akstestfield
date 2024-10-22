@@ -9,10 +9,10 @@ param (
   [string]$PortalVersion,
 
   [Parameter(Mandatory = $true)]
-  [securestring]$SqlPassword,
+  [string]$SqlPassword,
 
   [Parameter(Mandatory = $true)]
-  [securestring]$SqlUser,
+  [string]$SqlUser,
 
   [Parameter(Mandatory = $true)]
   [string]$SqlDatabase,
@@ -32,8 +32,8 @@ function Protect-Secret {
     [Parameter(Mandatory = $true)]
     [string]$SecretName
   )
-
-  return Set-Variable /p="$SecretValue" | kubeseal --raw --namespace $Namespace --name $SecretName
+  
+  return cmd /c "<NUL set /p =`"$SecretValue`"| kubeseal --raw --namespace $Namespace --name $SecretName"
 }
 
 $Namespace = "cpaq-$($ClientName.ToLower())"
@@ -103,10 +103,10 @@ $SecretsTemplatePath = ".\templates\secrets.tpl.yaml"
 if (Test-Path $SecretsTemplatePath) {
   $YamlTemplate = Get-Content -Path $SecretsTemplatePath -Raw
 
-  $YamlTemplate = $YamlTemplate -replace "{{SqlServer}}", "$(Protect-Secret -SecretValue $SqlServer -Namespace $Namespace -SecretName "dbsecrets")"
-  $YamlTemplate = $YamlTemplate -replace "{{SqlDatabase}}", "$(Protect-Secret -SecretValue $SqlDatabase -Namespace $Namespace -SecretName "dbsecrets")"
-  $YamlTemplate = $YamlTemplate -replace "{{SqlUser}}", "$(Protect-Secret -SecretValue $SqlUser -Namespace $Namespace -SecretName "dbsecrets")"
-  $YamlTemplate = $YamlTemplate -replace "{{SqlPassword}}", "$(Protect-Secret -SecretValue $SqlPassword -Namespace $Namespace -SecretName "dbsecrets")"
+  $YamlTemplate = $YamlTemplate -replace "{{SqlServer}}", "$(Protect-Secret -SecretValue $SqlServer -Namespace $Namespace -SecretName dbsecrets)"
+  $YamlTemplate = $YamlTemplate -replace "{{SqlDatabase}}", "$(Protect-Secret -SecretValue $SqlDatabase -Namespace $Namespace -SecretName dbsecrets)"
+  $YamlTemplate = $YamlTemplate -replace "{{SqlUser}}", "$(Protect-Secret -SecretValue $SqlUser -Namespace $Namespace -SecretName dbsecrets)"
+  $YamlTemplate = $YamlTemplate -replace "{{SqlPassword}}", "$(Protect-Secret -SecretValue $SqlPassword -Namespace $Namespace -SecretName dbsecrets)"
 
   $YamlFilePath = Join-Path $RelativePath "secrets.yaml"
   $YamlTemplate | Set-Content -Path $YamlFilePath
