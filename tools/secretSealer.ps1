@@ -1,0 +1,1 @@
+Write-Output | Set-Variable /p="%1" | kubeseal --raw --namespace cpaq-test-1 --name dbsecrets
