@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/tls/0/hosts/0",
+    "value": "spurs.int-dev-aks.cordiccloud.com"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/rules/0/host",
+    "value": "spurs.int-dev-aks.cordiccloud.com"
+  }
+]
