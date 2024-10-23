@@ -12,6 +12,8 @@ spec:
       labels:
         app: service-aggregator
     spec:
+      serviceAccountName: service-aggregator-service-account
+      automountServiceAccountToken: false
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
