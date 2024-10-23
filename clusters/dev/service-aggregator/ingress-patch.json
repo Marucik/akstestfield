@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/tls/0/hosts/0",
+    "value": "service-aggregator.int-dev-aks.cordiccloud.com"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/rules/0/host",
+    "value": "service-aggregator.int-dev-aks.cordiccloud.com"
+  }
+]

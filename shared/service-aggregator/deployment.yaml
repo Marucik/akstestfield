@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-aggregator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-aggregator
+  template:
+    metadata:
+      labels:
+        app: service-aggregator
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: service-aggregator
+          image: cordicdev.azurecr.io/service-aggregator
+          ports:
+            - containerPort: 8080
+              name: service-aggregator
+          resources:
+            requests:
+              cpu: 1m
+              memory: 200Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-aggregator
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: service-aggregator

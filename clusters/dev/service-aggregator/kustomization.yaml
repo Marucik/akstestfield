@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cpaq-liverpool
+
+resources:
+  - ../../../shared/service-aggregator
+  - ./namespace.yaml
+
+patches:
+  - path: ingress-patch.json
+    target:
+      name: service-aggregator
+      kind: Ingress
+
+images:
+  - name: cordicdev.azurecr.io/service-aggregator
+    newTag: 0.0.1
