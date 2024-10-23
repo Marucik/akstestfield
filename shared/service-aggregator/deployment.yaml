@@ -38,3 +38,39 @@ spec:
       targetPort: 80
   selector:
     app: service-aggregator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: service-aggregator-cluster-role
+rules:
+  - apiGroups: [""]
+    resources: ["nodes", "services", "pods", "endpoints"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get"]
+  - apiGroups: ["extensions"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: service-aggregator-service-account
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+
+metadata:
+  name: service-aggregator-cluster-role-binding
+
+roleRef:
+  kind: ClusterRole
+  name: service-aggregator-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+
+subjects:
+  - kind: ServiceAccount
+    name: service-aggregator-service-account
