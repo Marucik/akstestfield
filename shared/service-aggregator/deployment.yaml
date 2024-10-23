@@ -18,8 +18,8 @@ spec:
         - name: service-aggregator
           image: cordicdev.azurecr.io/service-aggregator
           ports:
-            - containerPort: 8080
-              name: service-aggregator
+            - containerPort: 80
+              name: http
           resources:
             requests:
               cpu: 1m
@@ -35,6 +35,6 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
   selector:
     app: service-aggregator
