@@ -47,7 +47,7 @@ metadata:
   name: service-aggregator-cluster-role
 rules:
   - apiGroups: [""]
-    resources: ["nodes", "services", "pods", "endpoints"]
+    resources: ["nodes", "services", "pods", "endpoints", "namespaces"]
     verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources: ["configmaps"]
