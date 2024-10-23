@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: {{Namespace}}
 
 resources:
-  - ../../../shared/cpaq-test
   - ../../../shared/portal
   - ./namespace.yaml
   - ./secrets.yaml
@@ -12,15 +11,9 @@ resources:
 patches:
   - path: ingress-patch.json
     target:
-      name: cpaq-ing
-      kind: Ingress
-  - path: ingress-patch.json
-    target:
       name: cpaq-portal-ing
       kind: Ingress
 
 images:
-  - name: cordicdev.azurecr.io/cpaq
-    newTag: {{CpaqVersion}}
   - name: cordicdev.azurecr.io/cpaq-portal
     newTag: {{PortalVersion}}

@@ -3,9 +3,6 @@ param (
   [string]$ClientName,
 
   [Parameter(Mandatory = $true)]
-  [string]$CpaqVersion,
-
-  [Parameter(Mandatory = $true)]
   [string]$PortalVersion,
 
   [Parameter(Mandatory = $true)]
@@ -86,7 +83,6 @@ if (Test-Path $KustomizationTemplatePath) {
   $YamlTemplate = Get-Content -Path $KustomizationTemplatePath -Raw
 
   $YamlTemplate = $YamlTemplate -replace "{{Namespace}}", $Namespace
-  $YamlTemplate = $YamlTemplate -replace "{{CpaqVersion}}", $CpaqVersion
   $YamlTemplate = $YamlTemplate -replace "{{PortalVersion}}", $PortalVersion
 
   $YamlFilePath = Join-Path $RelativePath "kustomization.yaml"
