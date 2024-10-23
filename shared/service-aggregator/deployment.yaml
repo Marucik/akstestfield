@@ -13,7 +13,7 @@ spec:
         app: service-aggregator
     spec:
       serviceAccountName: service-aggregator-service-account
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
