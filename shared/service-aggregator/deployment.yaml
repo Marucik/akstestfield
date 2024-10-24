@@ -4,6 +4,7 @@ metadata:
   name: service-aggregator
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: service-aggregator
@@ -49,6 +50,7 @@ metadata:
   name: service-aggregator-ui
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: service-aggregator-ui
