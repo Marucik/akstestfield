@@ -15,6 +15,6 @@ patches:
 
 images:
   - name: cordicdev.azurecr.io/service-aggregator
-    newTag: 0.0.5
+    newTag: 0.0.6
   - name: cordicdev.azurecr.io/service-aggregator-ui
     newTag: 0.0.2
