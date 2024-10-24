@@ -17,4 +17,4 @@ images:
   - name: cordicdev.azurecr.io/service-aggregator
     newTag: 0.0.4
   - name: cordicdev.azurecr.io/service-aggregator-ui
-    newTag: 0.0.1
+    newTag: 0.0.2
