@@ -41,38 +41,46 @@ spec:
   selector:
     app: service-aggregator
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: service-aggregator-cluster-role
-rules:
-  - apiGroups: [""]
-    resources: ["nodes", "services", "pods", "endpoints", "namespaces"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["get"]
-  - apiGroups: ["extensions"]
-    resources: ["deployments"]
-    verbs: ["get", "list", "watch"]
+  name: service-aggregator-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-aggregator-ui
+  template:
+    metadata:
+      labels:
+        app: service-aggregator-ui
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: service-aggregator-ui
+          image: cordicdev.azurecr.io/service-aggregator-ui
+          env:
+            - name: API_URL
+              value: service-aggregator.service-aggregator
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            requests:
+              cpu: 1m
+              memory: 200Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
 ---
 apiVersion: v1
-kind: ServiceAccount
-
+kind: Service
 metadata:
-  name: service-aggregator-service-account
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-
-metadata:
-  name: service-aggregator-cluster-role-binding
-
-roleRef:
-  kind: ClusterRole
-  name: service-aggregator-cluster-role
-  apiGroup: rbac.authorization.k8s.io
-
-subjects:
-  - kind: ServiceAccount
-    name: service-aggregator-service-account
+  name: service-aggregator-ui
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: service-aggregator-ui
