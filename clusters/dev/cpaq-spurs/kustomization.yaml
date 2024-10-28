@@ -16,5 +16,4 @@ patches:
 
 images:
   - name: cordicdev.azurecr.io/cpaq-portal
-    newTag: 1.1.0
-
+    newTag: 1.1.1

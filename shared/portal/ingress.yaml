@@ -49,3 +49,10 @@ spec:
                 name: cpaq-portal-svc-iis
                 port:
                   number: 80
+          - path: /adminws
+            pathType: Prefix
+            backend:
+              service:
+                name: cpaq-portal-svc-iis
+                port:
+                  number: 80
